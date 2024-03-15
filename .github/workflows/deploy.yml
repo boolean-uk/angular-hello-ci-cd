@@ -4,9 +4,17 @@ on:
     branches:
       - main
 jobs:
-  build:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    steps:
+      -name: run headless tests
+      run: npm run ci
+
+  deploy:
     name: Request Host Webhook
     runs-on: ubuntu-latest
+    needs: [test]
     steps:
       - name: Curl request
         run: curl -X POST -d {} ${{secrets.NETIFY_GIT_MAIN_HOOK}}
