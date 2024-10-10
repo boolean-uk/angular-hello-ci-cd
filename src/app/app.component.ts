@@ -10,7 +10,7 @@ declare var window: any;
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit { 
   title = 'hello-ci-cd';
 
   domain: string = '';
