@@ -12,6 +12,7 @@ declare var window: any;
 })
 export class AppComponent implements OnInit {
   title = 'hello-ci-cd';
+  testNr = 2;
 
   domain: string = '';
 
