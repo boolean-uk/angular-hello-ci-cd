@@ -1,5 +1,9 @@
 # Angular CI/CD
 
+## Site
+
+[Link to deployed site](https://incomparable-macaron-c894a5.netlify.app/)
+
 ## Learning objectives
 
 - Be able to use github actions to create pipelines
