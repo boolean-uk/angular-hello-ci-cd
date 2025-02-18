@@ -14,7 +14,12 @@ export class AppComponent implements OnInit {
   title = 'hello-ci-cd';
 
   domain: string = '';
+  isImageHidden = true;
 
+  toggleImageVisibility(event: MouseEvent) {
+    event.stopPropagation(); // Prevents event bubbling
+    this.isImageHidden = !this.isImageHidden; // Toggle image visibility
+  }
   ngOnInit() {
     const parsedUrl = new URL(window.location.href);
     const baseUrl = parsedUrl.origin;

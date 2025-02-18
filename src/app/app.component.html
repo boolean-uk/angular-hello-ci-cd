@@ -1,4 +1,15 @@
 <main>
   <h1>Hello</h1>
   <h2>From {{ domain }}</h2>
+  <a
+    href="https://youtu.be/dQw4w9WgXcQ"
+    target="_blank"
+    (click)="toggleImageVisibility($event)"
+    >I am not suspicious!</a
+  >
+  <img
+    [hidden]="isImageHidden"
+    src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDY3NHFwa3pnd3lwYnZ4cGZ0bng0cndpbGw4aDVjcGsxN3B0M3M4byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ju7l5y9osyymQ/giphy.gif"
+    alt="Rick Astley"
+  />
 </main>
