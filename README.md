@@ -1,5 +1,8 @@
 # Angular CI/CD
 
+## Link to the deployed application
+https://iridescent-biscotti-c3e88b.netlify.app/
+
 ## Learning objectives
 
 - Be able to use github actions to create pipelines
