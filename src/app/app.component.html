@@ -1,4 +1,110 @@
-<main>
-  <h1>Hello</h1>
-  <h2>From {{ domain }}</h2>
-</main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bursdag</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin: 50px 0 20px;
+            font-weight: bold;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .image-container {
+            margin: 20px auto;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            animation: fly 2s ease-out infinite;
+        }
+
+        @keyframes fly {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-50vh) rotate(360deg);
+            }
+            100% {
+                transform: translateY(-120vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        h2 {
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Thank you message and image container, shown immediately -->
+    <div id="thank-you-message">
+        <h2>Gratulerer med dagen, Mamma! 🎉</h2>
+        <p>Håper du har en fin dag!</p>
+    </div>
+
+    <div class="image-container">
+        <img src="data:image/jpeg;base64,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" alt="Bursdag Mamma" />
+    </div>
+
+    <!-- Add flying emoji effect -->
+    <div class="emoji" style="top: 10%; left: 25%;">🎂</div>
+    <div class="emoji" style="top: 40%; left: 40%;">🎉</div>
+    <div class="emoji" style="top: 70%; left: 60%;">🎁</div>
+    <div class="emoji" style="top: 30%; left: 70%;">🎈</div>
+    <div class="emoji" style="top: 50%; left: 20%;">🎉</div>
+    <div class="emoji" style="top: 80%; left: 30%;">🎂</div>
+    <div class="emoji" style="top: 10%; left: 90%;">🎁</div>
+    <div class="emoji" style="top: 60%; left: 10%;">🎈</div>
+    <div class="emoji" style="top: 50%; left: 50%;">🎉</div>
+    <div class="emoji" style="top: 20%; left: 80%;">🎈</div>
+    <div class="emoji" style="top: 60%; left: 80%;">🎉</div>
+    <div class="emoji" style="top: 90%; left: 10%;">🎂</div>
+    <div class="emoji" style="top: 15%; left: 50%;">🎁</div>
+    <div class="emoji" style="top: 50%; left: 75%;">🎈</div>
+    <div class="emoji" style="top: 20%; left: 20%;">🎉</div>
+    <div class="emoji" style="top: 70%; left: 30%;">🎁</div>
+    <div class="emoji" style="top: 60%; left: 90%;">🎂</div>
+    <div class="emoji" style="top: 40%; left: 60%;">🎉</div>
+    <div class="emoji" style="top: 10%; left: 10%;">🎁</div>
+    <div class="emoji" style="top: 30%; left: 50%;">🎂</div>
+</body>
+</html>
