@@ -1,6 +1,6 @@
 # Angular CI/CD
 
-This app was runned by pulling the repo on netlify.
+This app was run by pulling the repo on netlify. https://angularhello1.netlify.app/
 Ive also made 2nd website where I do CICD using github actions https://hello-gradient.netlify.app/
 
 ## Learning objectives
