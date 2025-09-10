@@ -1,0 +1,19 @@
+name: "Deploy"
+
+on:
+  pull_request:
+    types: closed
+
+jobs:
+    deploy:
+        if: github.event.pull_request.merged == true
+        runs-on: ubuntu-lastest
+        name: "Deploy on Netlify"
+        steps:
+            - uses: actions/checkout@v4
+            - uses: jsmrcaga/action-netlify-delpoy@master
+              with:
+                NETLIFY_AUTH_TOKEN: ${{ secrets.MY_AUTH_TOKEN }}
+                NETLIFY_SITE_ID: ${{ secrets.MY_SITE_ID }}
+                NETLIFY_DEPLOY_TO:PROD: true
+                build_directory: dist/hello-ci-cd/browser
