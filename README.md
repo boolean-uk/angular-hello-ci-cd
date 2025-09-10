@@ -1,5 +1,8 @@
 # Angular CI/CD
 
+This app was runned by pulling the repo on netlify.
+Ive also made 2nd website where I do CICD using github actions https://hello-gradient.netlify.app/
+
 ## Learning objectives
 
 - Be able to use github actions to create pipelines
