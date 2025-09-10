@@ -1,0 +1,19 @@
+name: "Deploy"
+
+on:
+    pull_request:
+        types: closed
+
+jobs:
+    deploy:
+        if: github.event.pull_request.merged == true
+        runs-on: ubuntu-latest
+        name: "Deploy on Netlify"
+        steps:
+            - uses: actions/checkout@v4
+            - uses: jsmrcaga/action-netlify-deploy@master
+              with:
+                NETLIFY_AUTH_TOKEN: nfp_Doan3JPnEHLgUKC9QvDbiNugjAroa5MRc95d
+                NETLIFY_SITE_ID:  ef2153a8-01d2-4b7f-96b2-cee9bc038310
+                NETLIFY_DEPLOY_TO_PROD: true
+                build_directory: dist/angular-hello-cicd/browser
