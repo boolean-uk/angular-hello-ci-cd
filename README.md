@@ -1,5 +1,7 @@
 # Angular CI/CD
 
+https://jonnashell-angular-ci-cd.netlify.app/
+
 ## Learning objectives
 
 - Be able to use github actions to create pipelines
