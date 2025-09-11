@@ -1,0 +1,174 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+interface Tile {
+  value: number;
+  merged: boolean;
+}
+
+@Component({
+  selector: 'app-2048',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './game-2048.component.html',
+  styleUrls: ['./game-2048.component.css']
+})
+export class Game2048Component {
+  size = 4;
+  board: Tile[][] = [];
+  score = 0;
+  gameOver = false;
+  won = false;
+
+  constructor() {
+    this.reset();
+  }
+
+  reset() {
+    this.score = 0;
+    this.gameOver = false;
+    this.won = false;
+    this.board = Array.from({ length: this.size }, () =>
+      Array.from({ length: this.size }, () => ({ value: 0, merged: false }))
+    );
+    this.addRandomTile();
+    this.addRandomTile();
+  }
+
+  addRandomTile() {
+    const empty: { x: number; y: number }[] = [];
+    for (let x = 0; x < this.size; x++) {
+      for (let y = 0; y < this.size; y++) {
+        if (this.board[x][y].value === 0) {
+          empty.push({ x, y });
+        }
+      }
+    }
+    if (empty.length === 0) return;
+    const { x, y } = empty[Math.floor(Math.random() * empty.length)];
+    this.board[x][y].value = Math.random() < 0.9 ? 2 : 4;
+  }
+
+  move(direction: 'up' | 'down' | 'left' | 'right') {
+    if (this.gameOver || this.won) return;
+    let moved = false;
+    this.clearMerged();
+    for (let i = 0; i < this.size; i++) {
+      let line: Tile[];
+      switch (direction) {
+        case 'up':
+          line = this.getCol(i);
+          moved = this.moveLine(line) || moved;
+          this.setCol(i, line);
+          break;
+        case 'down':
+          line = this.getCol(i).reverse();
+          moved = this.moveLine(line) || moved;
+          this.setCol(i, line.reverse());
+          break;
+        case 'left':
+          line = this.getRow(i);
+          moved = this.moveLine(line) || moved;
+          this.setRow(i, line);
+          break;
+        case 'right':
+          line = this.getRow(i).reverse();
+          moved = this.moveLine(line) || moved;
+          this.setRow(i, line.reverse());
+          break;
+      }
+    }
+    if (moved) {
+      this.addRandomTile();
+      if (this.isGameOver()) {
+        this.gameOver = true;
+      }
+    }
+  }
+
+  moveLine(line: Tile[]): boolean {
+    let moved = false;
+    for (let i = 1; i < this.size; i++) {
+      if (line[i].value === 0) continue;
+      let j = i;
+      while (j > 0 && line[j - 1].value === 0) {
+        line[j - 1].value = line[j].value;
+        line[j].value = 0;
+        moved = true;
+        j--;
+      }
+      if (
+        j > 0 &&
+        line[j - 1].value === line[j].value &&
+        !line[j - 1].merged &&
+        !line[j].merged
+      ) {
+        line[j - 1].value *= 2;
+        line[j - 1].merged = true;
+        this.score += line[j - 1].value;
+        if (line[j - 1].value === 2048) this.won = true;
+        line[j].value = 0;
+        moved = true;
+      }
+    }
+    return moved;
+  }
+
+  clearMerged() {
+    for (let x = 0; x < this.size; x++) {
+      for (let y = 0; y < this.size; y++) {
+        this.board[x][y].merged = false;
+      }
+    }
+  }
+
+  getRow(i: number): Tile[] {
+    return this.board[i];
+  }
+
+  setRow(i: number, row: Tile[]) {
+    this.board[i] = row;
+  }
+
+  getCol(i: number): Tile[] {
+    return this.board.map(row => row[i]);
+  }
+
+  setCol(i: number, col: Tile[]) {
+    for (let j = 0; j < this.size; j++) {
+      this.board[j][i] = col[j];
+    }
+  }
+
+  isGameOver(): boolean {
+    for (let x = 0; x < this.size; x++) {
+      for (let y = 0; y < this.size; y++) {
+        if (this.board[x][y].value === 0) return false;
+        if (
+          (x < this.size - 1 && this.board[x][y].value === this.board[x + 1][y].value) ||
+          (y < this.size - 1 && this.board[x][y].value === this.board[x][y + 1].value)
+        ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  handleKey(event: KeyboardEvent) {
+    switch (event.key) {
+      case 'ArrowUp':
+        this.move('up');
+        break;
+      case 'ArrowDown':
+        this.move('down');
+        break;
+      case 'ArrowLeft':
+        this.move('left');
+        break;
+      case 'ArrowRight':
+        this.move('right');
+        break;
+    }
+  }
+}

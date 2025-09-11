@@ -1,12 +1,14 @@
+
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Game2048Component } from './game-2048.component';
 
 declare var window: any;
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, Game2048Component],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
