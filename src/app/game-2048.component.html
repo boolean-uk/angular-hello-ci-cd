@@ -1,0 +1,18 @@
+<div class="game-2048" tabindex="0" (keydown)="handleKey($event)"
+  (touchstart)="handleTouchStart($event)" (touchend)="handleTouchEnd($event)" (focus)="handleFocus()">
+  <h2>2048 Game</h2>
+  <div class="score">Score: {{ score }}</div>
+  <div class="board">
+    <div *ngFor="let row of board" class="row">
+      <div *ngFor="let tile of row" class="tile" [ngClass]="'tile-' + tile.value">
+        {{ tile.value !== 0 ? tile.value : '' }}
+      </div>
+    </div>
+  </div>
+  <div class="status" *ngIf="gameOver">Game Over!</div>
+  <div class="status" *ngIf="won">You Win!</div>
+  <button (click)="reset()">Restart</button>
+  <div class="instructions">
+    <p>Use arrow keys to move the tiles. Combine tiles with the same number to reach 2048!</p>
+  </div>
+</div>
