@@ -179,12 +179,15 @@ export class Game2048Component {
 
   handleTouchStart(event: TouchEvent) {
     if (event.touches.length === 1) {
+      // Only handle swipes if the touch is on the game area, not on a button
+      const target = event.target as HTMLElement;
+      if (target.closest('button')) return;
       this.touchActive = true;
       this.touchStartX = event.touches[0].clientX;
       this.touchStartY = event.touches[0].clientY;
       this.requestScreenLock();
       // Focus the game element
-      const el = (event.target as HTMLElement).closest('.game-2048');
+      const el = target.closest('.game-2048');
       if (el && 'focus' in el && typeof (el as HTMLElement).focus === 'function') {
         (el as HTMLElement).focus();
       }
@@ -216,7 +219,9 @@ export class Game2048Component {
   handleTouchEnd(event: TouchEvent) {
     if (!this.touchActive) return;
     this.touchActive = false;
-    // Prevent scrolling while swiping on the game
+    // Only handle swipes if the touch is on the game area, not on a button
+    const target = event.target as HTMLElement;
+    if (target.closest('button')) return;
     event.preventDefault();
     const touch = event.changedTouches[0];
     const dx = touch.clientX - this.touchStartX;
