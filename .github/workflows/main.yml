@@ -15,4 +15,5 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.CICD_ACCESS_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.CICD_SERVER_TOKEN }}
           NETLIFY_DEPLOY_TO_PROD: true
-          build_directory: dist/sibbs-site/browser
+          build_directory: dist/hello-ci-cd/browser
+
