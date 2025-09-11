@@ -24,6 +24,7 @@ export class Game2048Component {
   private touchStartY = 0;
   private touchActive = false;
 
+  lockRequested = false;
   constructor() {
     this.reset();
   }
@@ -181,6 +182,27 @@ export class Game2048Component {
       this.touchActive = true;
       this.touchStartX = event.touches[0].clientX;
       this.touchStartY = event.touches[0].clientY;
+      this.requestScreenLock();
+    }
+  }
+
+  handleFocus() {
+    this.requestScreenLock();
+  }
+
+  async requestScreenLock() {
+    if (this.lockRequested) return;
+    this.lockRequested = true;
+    // Only try to lock on mobile devices
+    if (typeof window !== 'undefined' && 'orientation' in screen && (navigator as any).userAgent) {
+      const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test((navigator as any).userAgent);
+      if (isMobile && (screen as any).orientation && (screen as any).orientation.lock) {
+        try {
+          await (screen as any).orientation.lock('portrait');
+        } catch (e) {
+          // Ignore errors (e.g., not supported)
+        }
+      }
     }
   }
 
