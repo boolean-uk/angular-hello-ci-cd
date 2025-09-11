@@ -183,6 +183,13 @@ export class Game2048Component {
       this.touchStartX = event.touches[0].clientX;
       this.touchStartY = event.touches[0].clientY;
       this.requestScreenLock();
+      // Focus the game element
+      const el = (event.target as HTMLElement).closest('.game-2048');
+      if (el && 'focus' in el && typeof (el as HTMLElement).focus === 'function') {
+        (el as HTMLElement).focus();
+      }
+      // Prevent scrolling while swiping on the game
+      event.preventDefault();
     }
   }
 
@@ -209,6 +216,8 @@ export class Game2048Component {
   handleTouchEnd(event: TouchEvent) {
     if (!this.touchActive) return;
     this.touchActive = false;
+    // Prevent scrolling while swiping on the game
+    event.preventDefault();
     const touch = event.changedTouches[0];
     const dx = touch.clientX - this.touchStartX;
     const dy = touch.clientY - this.touchStartY;

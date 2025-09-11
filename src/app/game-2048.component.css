@@ -6,6 +6,12 @@
   border-radius: 10px;
   box-shadow: 0 4px 20px #bdbdbd;
   outline: none;
+  touch-action: none; /* Prevent browser gestures on mobile */
+}
+
+.game-2048:focus {
+  outline: 2px solid #edc22e;
+  box-shadow: 0 0 0 4px #edc22e44, 0 4px 20px #bdbdbd;
 }
 
 h2 {
