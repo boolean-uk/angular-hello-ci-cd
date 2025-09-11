@@ -55,7 +55,7 @@ export class Game2048Component {
   }
 
   move(direction: 'up' | 'down' | 'left' | 'right') {
-    if (this.gameOver || this.won) return;
+    if (this.gameOver) return;
     let moved = false;
     this.clearMerged();
     for (let i = 0; i < this.size; i++) {
