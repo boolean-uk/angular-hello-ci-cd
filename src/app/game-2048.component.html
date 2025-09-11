@@ -1,4 +1,5 @@
-<div class="game-2048" tabindex="0" (keydown)="handleKey($event)">
+<div class="game-2048" tabindex="0" (keydown)="handleKey($event)"
+  (touchstart)="handleTouchStart($event)" (touchend)="handleTouchEnd($event)">
   <h2>2048 Game</h2>
   <div class="score">Score: {{ score }}</div>
   <div class="board">

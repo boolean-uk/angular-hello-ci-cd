@@ -20,6 +20,10 @@ export class Game2048Component {
   gameOver = false;
   won = false;
 
+  private touchStartX = 0;
+  private touchStartY = 0;
+  private touchActive = false;
+
   constructor() {
     this.reset();
   }
@@ -170,5 +174,39 @@ export class Game2048Component {
         this.move('right');
         break;
     }
+  }
+
+  handleTouchStart(event: TouchEvent) {
+    if (event.touches.length === 1) {
+      this.touchActive = true;
+      this.touchStartX = event.touches[0].clientX;
+      this.touchStartY = event.touches[0].clientY;
+    }
+  }
+
+  handleTouchEnd(event: TouchEvent) {
+    if (!this.touchActive) return;
+    this.touchActive = false;
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - this.touchStartX;
+    const dy = touch.clientY - this.touchStartY;
+    if (Math.abs(dx) < 30 && Math.abs(dy) < 30) return; // ignore small swipes
+    if (Math.abs(dx) > Math.abs(dy)) {
+      if (dx > 0) {
+        this.handleSwipe('right');
+      } else {
+        this.handleSwipe('left');
+      }
+    } else {
+      if (dy > 0) {
+        this.handleSwipe('down');
+      } else {
+        this.handleSwipe('up');
+      }
+    }
+  }
+
+  handleSwipe(direction: 'up' | 'down' | 'left' | 'right') {
+    this.move(direction);
   }
 }
