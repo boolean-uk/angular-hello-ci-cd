@@ -1,0 +1,16 @@
+<div class="meme-container">
+<div>
+  <h1 class="cool-header">Random Reddit Meme Page</h1>
+</div>
+<div>
+  <button (click)="ngOnInit()">Get New Meme</button>
+</div>
+  <div *ngIf="isLoading" class="loading-spinner"></div>
+
+  <img
+    *ngIf="!isLoading"
+    [src]="meme?.url"
+    alt="Random Meme"
+    (load)="isLoading = false"
+  />
+</div>

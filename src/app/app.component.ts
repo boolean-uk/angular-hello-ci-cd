@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { MemeComponent } from "./meme/meme.component";
 
 declare var window: any;
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, MemeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

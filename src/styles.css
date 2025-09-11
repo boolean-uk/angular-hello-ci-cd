@@ -9,3 +9,8 @@ body {
 h2 {
   color: #4de4b8;
 }
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+}
