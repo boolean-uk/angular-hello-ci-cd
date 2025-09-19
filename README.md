@@ -1,5 +1,4 @@
 # Angular CI/CD
-
 ## Learning objectives
 
 - Be able to use github actions to create pipelines
